@@ -1171,13 +1171,48 @@
             .footer h2 {
                 font-size: 36px;
             }
+            /* Add scroll-to-top button styles */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-to-top.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.scroll-to-top i {
+    color: #fff;
+    font-size: 20px;
+}
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <a href="#" class="logo">MY PORTFOLIO</a>
+        <a href="#" class="logo" id="portfolio-logo">MY PORTFOLIO</a>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -1650,6 +1685,34 @@
                 hero.style.opacity = 1 - (scrolled / 700);
             }
         });
+        // Scroll to top when clicking on the portfolio logo
+document.getElementById('portfolio-logo').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Scroll to top when clicking on the scroll-to-top button
+document.getElementById('scrollToTop').addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Show/hide scroll-to-top button (add this to your existing scroll event)
+const scrollToTopBtn = document.getElementById('scrollToTop');
+if (window.scrollY > 300) {
+    scrollToTopBtn.classList.add('active');
+} else {
+    scrollToTopBtn.classList.remove('active');
+}
     </script>
+    <!-- Scroll to Top Button -->
+<div class="scroll-to-top" id="scrollToTop">
+    <i class="fas fa-chevron-up"></i>
+</div>
 </body>
 </html>
